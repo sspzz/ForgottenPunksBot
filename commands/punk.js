@@ -23,7 +23,6 @@ module.exports = {
       return { name: a.trait_type, value: a.value, inline: true };
     });
     const embed = new EmbedBuilder()
-      .setColor(0xf002f9)
       .setTitle(metaJSON.name)
       .setURL(`https://opensea.io/assets/ethereum/0x4addac15971ab60ead954b8f15a67518730450e0/${token}`)
       .setImage(`https://forgottenpunks.wtf/api/img/framed/${token}`)
