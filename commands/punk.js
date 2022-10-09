@@ -10,8 +10,6 @@ module.exports = {
       option
         .setName("token")
         .setDescription("Token ID of the ForgottenPunk")
-        .setMinValue(0)
-        .setMaxValue(999)
     ),
   async execute(interaction) {
     const token = interaction.options.getInteger("token");
