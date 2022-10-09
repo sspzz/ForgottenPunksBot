@@ -10,6 +10,7 @@ module.exports = {
       option
         .setName("token")
         .setDescription("Token ID of the ForgottenPunk")
+        .setRequired(true)
     ),
   async execute(interaction) {
     const token = interaction.options.getInteger("token");
