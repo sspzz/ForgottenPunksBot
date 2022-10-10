@@ -5,7 +5,6 @@ module.exports = {
     .setName("gif")
     .setDescription("Randomized GIF of ForgottenPunks"),
   async execute(interaction) {
-    interaction.deferReply({ ephemeral: true });
     const embed = new EmbedBuilder()
       .setImage("https://forgottenpunks.wtf/api/img/gif");
     return interaction.reply({ embeds: [embed] });
