@@ -14,9 +14,12 @@ module.exports = {
     ),
   async execute(interaction) {
     const token = interaction.options.getInteger("token");
-    const embed = new EmbedBuilder().setImage(
-      `https://forgottenpunks.wtf/api/img/gm/${token}`
-    );
+    const embed = new EmbedBuilder()
+      .setTitle(`ForgottenPunk #${token}`)
+      .setURL(
+        `https://opensea.io/assets/ethereum/0x4addac15971ab60ead954b8f15a67518730450e0/${token}`
+      )
+      .setImage(`https://forgottenpunks.wtf/api/img/gm/${token}`);
     return interaction.reply({ embeds: [embed] });
   },
 };

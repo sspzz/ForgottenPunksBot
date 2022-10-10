@@ -10,15 +10,12 @@ module.exports = {
       option
         .setName("token")
         .setDescription("Token ID of the ForgottenPunk")
+        .setMinValue(0)
+        .setMaxValue(999)
         .setRequired(true)
     ),
   async execute(interaction) {
     const token = interaction.options.getInteger("token");
-    if (token < 0 || token > 999) {
-      return interaction.reply(
-        "Invalid token, please use a value between 0 and 999."
-      );
-    }
     const requestPromise = util.promisify(request);
     const { body } = await requestPromise(
       `https://forgottenpunks.wtf/api/meta/${token}`
