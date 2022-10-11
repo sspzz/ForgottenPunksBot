@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const util = require("util");
 const request = require("request");
+const api = require("../util/api");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,7 +30,7 @@ module.exports = {
       .setURL(
         `https://opensea.io/assets/ethereum/0x4addac15971ab60ead954b8f15a67518730450e0/${token}`
       )
-      .setImage(`https://forgottenpunks.wtf/api/img/framed/${token}`)
+      .setImage(api.punk(token))
       .addFields(fields);
     return interaction.reply({ embeds: [embed] });
   },

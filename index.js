@@ -18,6 +18,18 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
+// const twitterClient = new Twitter(twitterConf);
+// const channelId = '11111111111111111111'; 
+// const stream = twitterClient.stream('statuses/filter', {
+//   follow: '2899773086', // @Every3Minutes, specify whichever Twitter ID you want to follow
+// });
+
+// stream.on('tweet', tweet => {
+//   const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+//   client.channels.get(dest).send(twitterMessage);
+//   return false;
+// });
+
 client.once("ready", () => {
   console.log("Ready!");
 });
@@ -31,6 +43,9 @@ client.on("interactionCreate", async (interaction) => {
 
   try {
     await command.execute(interaction);
+	if (command.postExecute) {
+		await command.postExecute();
+	}
   } catch (error) {
     console.error(error);
     await interaction.reply({
