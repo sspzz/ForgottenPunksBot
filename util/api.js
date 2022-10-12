@@ -10,4 +10,10 @@ module.exports = {
   gif: function () {
     return `${process.env.FORGOTTENPUNKS_API}/api/img/random.gif`;
   },
+  giff: function () {
+    return `${process.env.FORGOTTENPUNKS_API}/api/img/framed/random.gif`;
+  },
+  say: function (token, phrase) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/img/say?token=${token}&phrase=${encodeURIComponent(phrase)}`;
+  },
 };
