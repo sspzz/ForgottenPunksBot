@@ -10,9 +10,12 @@ module.exports = {
     .setName("gif")
     .setDescription("Randomized GIF of ForgottenPunks"),
   async execute(interaction) {
+    await interaction.deferReply();
     const fileName = "randompunks.gif";
     const fileAttach = new AttachmentBuilder(api.gif(), { name: fileName });
-    const embed = new EmbedBuilder().setTitle("Random ForgottenPunks GIF").setImage(`attachment://${fileName}`);
-    return interaction.reply({ embeds: [embed], files: [fileAttach] });
+    const embed = new EmbedBuilder()
+      .setTitle("Random ForgottenPunks GIF")
+      .setImage(`attachment://${fileName}`);
+    return interaction.editReply({ embeds: [embed], files: [fileAttach] });
   },
 };
