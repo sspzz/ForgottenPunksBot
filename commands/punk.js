@@ -18,9 +18,7 @@ module.exports = {
   async execute(interaction) {
     const token = interaction.options.getInteger("token");
     const requestPromise = util.promisify(request);
-    const { body } = await requestPromise(
-      `https://forgottenpunks.wtf/api/meta/${token}`
-    );
+    const { body } = await requestPromise(util.api.meta(token));
     const metaJSON = JSON.parse(body);
     const fields = metaJSON.attributes.map((a) => {
       return { name: a.trait_type, value: a.value, inline: true };
