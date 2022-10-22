@@ -14,14 +14,13 @@ module.exports = {
       return { name: a.trait_type, value: a.value, inline: false };
     });
     const embed = new EmbedBuilder()
-      .setTitle("A Soul has been Summoned!")
-      .setDescription(`A new Soul has been Summoned by ForgottenPunk #${summonerId}!`)
-      .setURL(
-        `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`
-      )
+      .setTitle("A SoulPunk has been Summoned!")
       .setImage(api.soul(soulId))
       .setThumbnail(api.punknoframe(summonerId))
-      .addFields(fields);
+      .addFields(fields)
+      .setURL(
+        `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`
+      );
     return channel.send({ embeds: [embed] });
   },
 };
