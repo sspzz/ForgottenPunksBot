@@ -18,5 +18,8 @@
   "devDependencies": {
     "eslint": "^8.25.0",
     "ethers": "^5.7.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
