@@ -23,4 +23,19 @@ module.exports = {
       );
     return channel.send({ embeds: [embed] });
   },
+  postCircle: async function postCircle(client, minter, isClaim) {
+    const channel = client.channels.cache.get(process.env.POST_SUMMON_CHANNEL);
+    const embed = new EmbedBuilder()
+      .setTitle(
+        `A Summoning Circle has been ${isClaim ? "claimed" : "minted"}!`
+      )
+      .setFooter({
+        text: `${isClaim ? "Claimed" : "Minted"} by ${minter}`,
+      })
+      .setImage(api.circle())
+    // .setURL(
+    //   `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`
+    // );
+    return channel.send({ embeds: [embed] });
+  },
 };

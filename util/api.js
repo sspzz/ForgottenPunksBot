@@ -39,4 +39,8 @@ module.exports = {
     return `${process.env.FORGOTTENPUNKS_API}/api/souls/img/framed/random.gif`;
   },
 
+  circle: function () {
+    return `${process.env.FORGOTTENPUNKS_API}/api/spells/img/0`;
+  },
+
 };

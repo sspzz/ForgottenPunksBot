@@ -29,6 +29,35 @@ const abi = [
   },
 ];
 
+const spellsAbi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "claimer",
+        type: "address"
+      }
+    ],
+    name: "SummoningCircleClaimed",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "minter",
+        type: "address"
+      }
+    ],
+    name: "SummoningCircleMinted",
+    type: "event"
+  },
+]
+
 function getProvider() {
   return new ethers.providers.AlchemyProvider(
     process.env.ALCHEMY_NETWORK == "mainnet"
@@ -43,6 +72,13 @@ module.exports = {
     return new ethers.Contract(
       process.env.SOULS_CONTRACT_ADDRESS,
       abi,
+      getProvider()
+    );
+  },
+  spellsMinterContract: function () {
+    return new ethers.Contract(
+      process.env.SPELLSMINTER_CONTRACT_ADDRESS,
+      spellsAbi,
       getProvider()
     );
   },

@@ -26,6 +26,12 @@ client.once("ready", () => {
   contract.soulsContract().on("SoulSummoned", async (tokenContract, tokenId, soulId) => {
     await summon.postSummon(client, tokenId, soulId);
   })
+  contract.spellsMinterContract().on("SummoningCircleMinted", async (minter) => {
+    await summon.postCircle(minter, false);
+  })
+  contract.spellsMinterContract().on("SummoningCircleClaimed", async (minter) => {
+    await summon.postCircle(minter, true);
+  })
 });
 
 client.on("interactionCreate", async (interaction) => {
