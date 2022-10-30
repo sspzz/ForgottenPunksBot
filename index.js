@@ -30,7 +30,7 @@ client.once("ready", () => {
     await summon.postCircle(client, minter, false);
   })
   contract.spellsMinterContract().on("SummoningCircleClaimed", async (minter) => {
-    await summon.postCircle(client minter, true);
+    await summon.postCircle(client, minter, true);
   })
 });
 
