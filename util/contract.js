@@ -1,5 +1,4 @@
-const ethers = require('ethers');
-
+const { ethers } = require('ethers');
 require("dotenv").config();
 
 const abi = [
