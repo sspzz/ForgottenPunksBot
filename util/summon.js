@@ -14,7 +14,7 @@ module.exports = {
       return { name: a.trait_type, value: a.value, inline: false };
     });
     const embed = new EmbedBuilder()
-      .setTitle("A SoulPunk has been Summoned!")
+      .setTitle(`SoulPunk #${soulId} has been Summoned!`)
       .setImage(api.soul(soulId))
       .setThumbnail(api.punknoframe(summonerId))
       .addFields(fields)
@@ -25,17 +25,13 @@ module.exports = {
   },
   postCircle: async function postCircle(client, minter, isClaim) {
     const channel = client.channels.cache.get(process.env.POST_SUMMON_CHANNEL);
+    const url =
+      "https://opensea.io/assets/ethereum/0x41efbce86158f2a54368fe5ce80ce1d496acaa5e/0";
     const embed = new EmbedBuilder()
-      .setTitle(
-        `A Summoning Circle has been ${isClaim ? "claimed" : "minted"}!`
-      )
-      .setFooter({
-        text: `${isClaim ? "Claimed" : "Minted"} by ${minter}`,
-      })
       .setImage(api.circle())
-    // .setURL(
-    //   `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`
-    // );
+      .setTitle(`${isClaim ? "Claim" : "Mint"}: Summoning Circle}!`)
+      .setFooter({ text: `${isClaim ? "Claimed" : "Minted"} by ${minter}` })
+      .setURL(url);
     return channel.send({ embeds: [embed] });
   },
 };
