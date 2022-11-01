@@ -29,7 +29,7 @@ module.exports = {
       "https://opensea.io/assets/ethereum/0x41efbce86158f2a54368fe5ce80ce1d496acaa5e/0";
     const embed = new EmbedBuilder()
       .setImage(api.circle())
-      .setTitle(`${isClaim ? "Claim" : "Mint"}: Summoning Circle}!`)
+      .setTitle(`${isClaim ? "Claim" : "Mint"}: Summoning Circle!`)
       .setFooter({ text: `${isClaim ? "Claimed" : "Minted"} by ${minter}` })
       .setURL(url);
     return channel.send({ embeds: [embed] });
