@@ -10,7 +10,7 @@ module.exports = {
     .addIntegerOption((option) =>
       option
         .setName("token")
-        .setDescription("Token ID of the SoulPunk")
+        .setDescription("Token ID")
         .setMinValue(0)
         .setMaxValue(665)
         .setRequired(true)

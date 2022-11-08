@@ -8,7 +8,7 @@ module.exports = {
     .addIntegerOption((option) =>
       option
         .setName("token")
-        .setDescription("Token ID of the ForgottenPunk")
+        .setDescription("Token ID")
         .setMinValue(0)
         .setMaxValue(999)
         .setRequired(true)
@@ -20,7 +20,7 @@ module.exports = {
       .setURL(
         `https://opensea.io/assets/ethereum/0x4addac15971ab60ead954b8f15a67518730450e0/${token}`
       )
-      .setImage(api.gm(token));
+      .setImage(api.gm(token, false));
     return interaction.reply({ embeds: [embed] });
   },
 };
