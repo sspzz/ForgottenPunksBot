@@ -6,21 +6,24 @@ require("dotenv").config();
 
 module.exports = {
   postSummon: async function postSummon(client, summonerId, soulId) {
-    const channel = client.channels.cache.get(process.env.POST_SUMMON_CHANNEL);
+    const title = `SoulPunk #${soulId} has been Summoned!`;
+    const soulUrl = `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`;
+    const soulImage = api.soul(soulId);
+    const summonerImage = api.punknoframe(summonerId);
     const requestPromise = util.promisify(request);
     const { body } = await requestPromise(api.soulmeta(soulId));
     const metaJSON = JSON.parse(body);
     const fields = metaJSON.attributes.map((a) => {
       return { name: a.trait_type, value: a.value, inline: false };
     });
+
     const embed = new EmbedBuilder()
-      .setTitle(`SoulPunk #${soulId} has been Summoned!`)
-      .setImage(api.soul(soulId))
-      .setThumbnail(api.punknoframe(summonerId))
+      .setTitle(title)
+      .setImage(soulImage)
+      .setThumbnail(summonerImage)
       .addFields(fields)
-      .setURL(
-        `https://opensea.io/assets/ethereum/${process.env.SOULS_CONTRACT_ADDRESS}/${soulId}`
-      );
+      .setURL(soulUrl);
+    const channel = client.channels.cache.get(process.env.POST_SUMMON_CHANNEL);
     return channel.send({ embeds: [embed] });
   },
   postCircle: async function postCircle(client, minter, isClaim) {

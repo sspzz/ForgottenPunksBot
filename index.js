@@ -3,6 +3,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const contract = require("./util/contract");
 const summon = require("./util/summon");
+const lair = require("./util/lair.js");
+const warriors = require("./util/warriors.js");
 require("dotenv").config();
 
 // Create a new client instance
@@ -23,15 +25,92 @@ for (const file of commandFiles) {
 client.once("ready", () => {
   console.log("Ready!");
 
-  contract.soulsContract().on("SoulSummoned", async (tokenContract, tokenId, soulId) => {
-    await summon.postSummon(client, tokenId, soulId);
-  })
-  contract.spellsMinterContract().on("SummoningCircleMinted", async (minter) => {
-    await summon.postCircle(client, minter, false);
-  })
-  contract.spellsMinterContract().on("SummoningCircleClaimed", async (minter) => {
-    await summon.postCircle(client, minter, true);
-  })
+  contract
+    .soulsContract()
+    .on("SoulSummoned", async (tokenContract, tokenId, soulId) => {
+      try {
+        await summon.postSummon(client, tokenId, soulId);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  contract
+    .spellsMinterContract()
+    .on("SummoningCircleMinted", async (minter) => {
+      try {
+        await summon.postCircle(client, minter, false);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  contract
+    .spellsMinterContract()
+    .on("SummoningCircleClaimed", async (minter) => {
+      try {
+        await summon.postCircle(client, minter, true);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+  contract.warriorsContract().on("WarriorMinted", async (warriorId) => {
+    try {
+      warriors.postMint(client, warriorId);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  contract.beastsContract().on("BeastSpawnedEnabled", async (beastId) => {
+    try {
+      lair.postBeastReady(client, beastId);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  contract.beastLairContract().on("AllSpawnStolen", async (beastId) => {
+    try {
+      lair.postAllStolen(client, beastId);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  contract
+    .beastLairContract()
+    .on("SpawnStolen", async (spawnId, beastId, warriorId) => {
+      try {
+        lair.postSteal(client, spawnId, beastId, warriorId);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  contract
+    .beastLairContract()
+    .on("WarriorEnslaved", async (beastId, warriorId) => {
+      try {
+        lair.postEnslave(client, beastId, warriorId);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  contract
+    .beastLairContract()
+    .on("WarriorKilled", async (beastId, warriorId) => {
+      try {
+        lair.postKilled(client, beastId, warriorId);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  contract
+    .beastLairContract()
+    .on("WarriorEscaped", async (beastId, warriorId) => {
+      try {
+        lair.postEscaped(client, beastId, warriorId);
+      } catch (error) {
+        console.log(error);
+      }
+    });
 });
 
 client.on("interactionCreate", async (interaction) => {

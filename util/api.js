@@ -34,4 +34,20 @@ module.exports = {
     return `${process.env.FORGOTTENPUNKS_API}/api/spells/img/0`;
   },
 
+  spawn: function (token) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/spawn/img/framed/${token}`;
+  },
+  spawnMeta: function (token) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/spawn/meta/${token}`;
+  },
+  beast: function (token) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/beasts/img/framed/${token}`;
+  },
+  warrior: function (token) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/warriors/img/framed/${token}`;
+  },
+  warriorMeta: function (token) {
+    return `${process.env.FORGOTTENPUNKS_API}/api/warriors/meta/${token}`;
+  },
+
 };
